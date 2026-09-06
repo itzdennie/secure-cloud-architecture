@@ -33,15 +33,13 @@ The database stores student records. The database should remain private and shou
 # Security Controls
 
 ### IAM
-Explain who should have access to the cloud environment:
 Access should be strictly granted using the Principle of Least Privilege so users only get permissions necessary for their role.
 
 ### MFA
-Explain which accounts should use Multi-Factor Authentication:
 Multi-Factor Authentication should be mandatory for all administrative and user accounts to add an extra layer of protection beyond passwords.
 
 ### Firewall / Security Group
-Explain what connections should be allowed:
+Allowed connections:
 * Internet → Load Balancer = Allowed
 * Load Balancer → Application Server = Allowed
 * Application Server → Database = Allowed
@@ -49,19 +47,15 @@ Explain what connections should be allowed:
 * Internet → Application Server = Blocked
 
 ### Encryption
-Explain why student information should be encrypted:
 Student information must be encrypted at rest and in transit to protect sensitive data from theft or interception.
 
 ### Logging
-Explain what activities should be recorded:
 All user authentication attempts, system events, and network requests should be recorded for security auditing.
 
 ### Monitoring
-Explain what suspicious activity should be monitored:
 System traffic and resource usage should be monitored for unusual spikes, unauthorized login attempts, and suspicious activities.
 
 ### Backup
-Explain why the database should have backups:
 Regular database backups ensure data can be recovered in case of accidental deletion, hardware failure, or ransomware attacks.
 
 ---
@@ -90,42 +84,42 @@ Regular database backups ensure data can be recovered in case of accidental dele
 | Database access rules | Customer |
 | Backups | Customer |
 
+1. **What does Security OF the Cloud mean?**
+   This refers to the security of the underlying infrastructure, physical hardware, data centers, and network facilities managed by the cloud provider.
+
+2. **What does Security IN the Cloud mean?**
+   This refers to the security configurations, user permissions, application code, data encryption, and access controls managed by the customer.
+
 ---
 
 # Architecture Questions
 
-### 1. What does Security OF the Cloud mean?
-Security OF the Cloud refers to the security of the underlying physical infrastructure, data centers, server hardware, and core networking facilities managed directly by the cloud provider.
+3. **Which resource should be directly accessible from the Internet?**
+   The CDN and the Load Balancer.
 
-### 2. What does Security IN the Cloud mean?
-Security IN the Cloud refers to the security configurations, user account access controls, application logic, database security rules, firewall policies, and data encryption managed by the customer.
+4. **Why should the database remain private?**
+   To protect sensitive student records from direct exposure and external attacks.
 
-### 3. Which resource should be directly accessible from the Internet?
-The CDN and the Load Balancer.
+5. **Why should users not connect directly to the database?**
+   To prevent unauthorized queries, data tampering, and bypassing of application security logic.
 
-### 4. Why should the database remain private?
-To protect sensitive student records from direct public exposure and unauthorized access from external network threats.
+6. **What is the purpose of a load balancer?**
+   To distribute incoming web traffic across multiple application servers to prevent overloading.
 
-### 5. Why should users not connect directly to the database?
-To prevent direct database queries that bypass application authentication, input validation, and business logic, which could lead to data tampering or leaks.
+7. **What happens if one application server fails?**
+   The load balancer redirects incoming requests to the remaining operational application servers.
 
-### 6. What is the purpose of a load balancer?
-To distribute incoming user web traffic evenly across multiple application servers to optimize network efficiency and prevent system overload.
+8. **What is the purpose of a CDN?**
+   To cache static assets geographically closer to users to improve site loading speed.
 
-### 7. What happens if one application server fails?
-The load balancer automatically detects the failure and reroutes user traffic to the remaining healthy application servers without interrupting service.
+9. **Why should administrator accounts use MFA?**
+   Because they have elevated privileges, and MFA adds an extra defense layer against password compromise.
 
-### 8. What is the purpose of a CDN?
-To cache static web content geographically closer to users across edge locations to significantly increase loading speeds.
+10. **Why should administrator access not be given to every employee?**
+    To enforce the principle of least privilege and minimize security risks or accidental misconfigurations.
 
-### 9. Why should administrator accounts use MFA?
-Because administrative accounts hold elevated access privileges; requiring MFA prevents total account takeover even if passwords are stolen.
+11. **Why are logging and monitoring important?**
+    They help track system activity, detect suspicious behavior, and audit security events.
 
-### 10. Why should administrator access not be given to every employee?
-To enforce the Principle of Least Privilege and minimize administrative errors, security risks, or unauthorized access modifications.
-
-### 11. Why are logging and monitoring important?
-They provide complete visibility into system activities, allowing security teams to track actions, audit events, and detect suspicious behavior in real time.
-
-### 12. Why are backups important?
-They ensure critical data can be quickly recovered in the event of system failures, database corruption, accidental deletion, or ransomware incidents.
+12. **Why are backups important?**
+    They allow data restoration in case of system failures, corruption, or cyberattacks.
